@@ -137,18 +137,18 @@ install_deps
 delete_all_functions
 announce "Deploying functions to Node 8 runtime ..."
 deploy
-if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
+# if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
   waitForPropagation
   run_tests
-fi
-pick_node6
-announce "Re-deploying the same functions to Node 6 runtime ..."
-deploy
-waitForPropagation
-if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
-  run_tests
-else
-  run_all_tests
-fi
-cleanup
+# fi
+# pick_node6
+# announce "Re-deploying the same functions to Node 6 runtime ..."
+# deploy
+# waitForPropagation
+# if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
+#   run_tests
+# else
+#   run_all_tests
+# fi
+# cleanup
 announce "All tests pass!"
