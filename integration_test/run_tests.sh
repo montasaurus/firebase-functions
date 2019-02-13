@@ -132,7 +132,7 @@ function cleanup {
 }
 
 function installGCloud {
-  apt install -y google-cloud-sdk
+  sudo apt install -y google-cloud-sdk
 }
 
 build_sdk
@@ -143,7 +143,7 @@ announce "Deploying functions to Node 8 runtime ..."
 deploy
 # if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
   waitForPropagation
-  installGCloud
+  # installGCloud
   run_tests
 # fi
 # pick_node6
