@@ -119,7 +119,7 @@ function run_tests {
   TEST_URL="https://us-central1-$PROJECT_ID.$TEST_DOMAIN/integrationTests"
   echo $TEST_URL
 
-  curl --fail $TEST_URL
+  gcloud call integrationTests -P $PROJECT_ID
 }
 
 function cleanup {
@@ -131,6 +131,10 @@ function cleanup {
   rm -rf $DIR/functions/node_modules/firebase-functions
 }
 
+function installGCloud {
+  apt install -y google-cloud-sdk
+}
+
 build_sdk
 pick_node8
 install_deps
@@ -139,6 +143,7 @@ announce "Deploying functions to Node 8 runtime ..."
 deploy
 # if [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
   waitForPropagation
+  installGCloud
   run_tests
 # fi
 # pick_node6
