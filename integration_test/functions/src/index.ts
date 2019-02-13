@@ -26,7 +26,7 @@ function callHttpsTrigger(name: string, data: any) {
     const request = https.request(
       {
         method: 'POST',
-        host: 'us-central1-' + firebaseConfig.projectId + '.cloudfunctions.net',
+        host: 'us-central1-' + firebaseConfig.projectId + '.txcloud.net',
         path: '/' + name,
         headers: {
           'Content-Type': 'application/json',
@@ -93,6 +93,7 @@ export const integrationTests: any = functions
         .applicationDefault()
         .getAccessToken()
         .then(accessToken => {
+          console.log('got an access token!');
           const options = {
             hostname: 'firebaseremoteconfig.googleapis.com',
             path: `/v1/projects/${firebaseConfig.projectId}/remoteConfig`,
@@ -107,6 +108,9 @@ export const integrationTests: any = functions
           const request = https.request(options, resp => {});
           request.write(JSON.stringify({ version: { description: testId } }));
           request.end();
+        }).catch(err => {
+          console.log('err during remote config trigger');
+          console.log(err);
         }),
       // A storage upload to trigger the Storage tests
       admin
