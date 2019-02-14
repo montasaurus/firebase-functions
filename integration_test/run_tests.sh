@@ -119,7 +119,7 @@ function run_tests {
   TEST_URL="https://us-central1-$PROJECT_ID.$TEST_DOMAIN/integrationTests"
   echo $TEST_URL
 
-  gcloud functions call integrationTests -P $PROJECT_ID
+  gcloud functions call integrationTests --project=$PROJECT_ID
 }
 
 function cleanup {
