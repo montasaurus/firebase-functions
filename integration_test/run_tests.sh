@@ -63,9 +63,9 @@ function delete_all_functions {
   cd $DIR
   # Try to delete, if there are errors it is because the project is already empty,
   # in that case do nothing. 
-  firebase functions:delete callableTests createUserTests databaseTests deleteUserTests firestoreTests integrationTests pubsubTests remoteConfigTests --force --project=$PROJECT_ID_NODE_6 || : &
+  firebase functions:delete callableTests createUserTests databaseTests deleteUserTests firestoreTests integrationTests pubsubTests remoteConfigTests --force --project=$PROJECT_ID_NODE_6 --token 1/vouaXOkyNgSbK4WLUSpUqeMrf5oEcWO5Rx9c6f7b6zo|| : &
   if ! [[ $PROJECT_ID_NODE_6 == $PROJECT_ID_NODE_8 ]]; then
-    firebase functions:delete callableTests createUserTests databaseTests deleteUserTests firestoreTests integrationTests pubsubTests remoteConfigTests --force --project=$PROJECT_ID_NODE_8 || : &
+    firebase functions:delete callableTests createUserTests databaseTests deleteUserTests firestoreTests integrationTests pubsubTests remoteConfigTests --force --project=$PROJECT_ID_NODE_8 --token 1/vouaXOkyNgSbK4WLUSpUqeMrf5oEcWO5Rx9c6f7b6zo|| : &
   fi
   wait
   announce "Project emptied."
@@ -75,7 +75,7 @@ function deploy {
   cd $DIR
   ./functions/node_modules/.bin/tsc -p functions/
   # Deploy functions, and security rules for database and Firestore. If the deploy fails, retry twice
-  for i in 1 2 3; do firebase deploy --project=$PROJECT_ID --only functions,database,firestore && break; done
+  for i in 1 2 3; do firebase deploy --project=$PROJECT_ID --only functions,database,firestore --token 1/vouaXOkyNgSbK4WLUSpUqeMrf5oEcWO5Rx9c6f7b6zo && break; done
 }
 
 # At the moment, functions take 30-40 seconds AFTER firebase deploy returns successfully to go live
